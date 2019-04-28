@@ -1,2 +1,4 @@
 # vuejs
-The vue project with only static content. 
+The vue project with static content. 
+
+Step by step learning procedure. 
