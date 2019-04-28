@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Brand Management</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="card text-dark bg-primary">
+          <div class="card">
+              <div class="card-header text-primary">
+                  Add Brand
+              </div>
+              <div class="card-body">
+                  <form class="form-inline">
+                        <div class="form-group">
+                            <label for="id">ID</label>
+                            <input type="text" id="id" class="form-control" v-model="id">
+                            <label for="namd">Name</label>
+                            <input type="text" id="name" class="form-control" v-model="name">
+                            <input type="button" name="" id="id" class="form-control btn btn-primary" value="Add" @click="add">
+                            <input type="text" placeholder="Search" class="form-control" id="search" v-model="keywords">
+                        </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in search(keywords)" :key="item.id">
+                    <td scope="row">{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a href="#" class="badge badge-primay">Edit</a>
+                        <a href="#" class="badge badge-danger" @click.prevent="del(item.id)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script src="script/myScript.js"></script>
+</body>
+</html>
