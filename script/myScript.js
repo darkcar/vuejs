@@ -50,6 +50,17 @@ Vue.directive(
     }
 );
 
+/**
+ * v-color: set font color
+ */
+Vue.directive(
+    'color', {
+        bind: function(el) {
+            el.style.color = 'red'
+        }
+    }
+);
+
 var vm = new Vue({
     el: '#app',
     data: {
