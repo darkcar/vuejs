@@ -11,9 +11,14 @@
 </head>
 <body>
     <div id="app" class="container">
+        <div class="jumbotron">
+            <h2 class="display-4" v-fontsize="100">VueJs Application</h2>
+        </div>
+
         <div class="card text-dark bg-primary">
           <div class="card">
-              <div class="card-header text-primary">
+              <!--Private Directives-->
+              <div class="card-header text-primary" v-fontweight="900">
                   Add Brand
               </div>
               <div class="card-body">
@@ -26,7 +31,7 @@
                             <input type="text" id="name" class="form-control" v-model="name" @keyup.enter="add">
                             <input type="button" name="" id="id" class="form-control btn btn-primary" value="Add" @click="add">
                             <!-- All Vue Directives must be started with v-. -->
-                            <input type="text" placeholder="Search" class="form-control" id="search" v-model="keywords" v-focus v-color>
+                            <input type="text" placeholder="Search" class="form-control" id="search" v-model="keywords" v-focus v-color="'green'">
                         </div>
                   </form>
               </div>
