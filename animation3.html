@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hook Function to simulate half animation</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-3">Simulate "add to cart" animation in Vue</h1>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <button type="button" class="btn btn-primary" @click="flag=!flag">Add to Cart</button>
+                    <div style="height: 15px">
+                        <transition
+                            v-on:before-enter="beforeEnter"
+                            v-on:enter="enter"
+                            v-on:after-enter="afterEnter">
+                            <div class="ball" v-show="flag"></div>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md">
+                    <div class="dest">
+                        <span class="shopping-cart"><i class="fas fa-cart-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            },
+            methods: {
+                // Hook function, first arg el represents the DOM 
+                // el = document.getElementById('');
+                beforeEnter(el) {
+                    // The starting point
+                    el.style.transform = "translate(0, 0)";
+                },
+                enter(el,done) {
+                    // force referesh 
+                    el.offsetWidth;
+                    // The ending point
+                    el.style.transform = "translate(150px, 450px)";
+                    el.style.transition = "all 1s ease";
+                    // Here, done() == afterEnter().
+                    done();
+                },
+                afterEnter(el) {
+                    this.flag = !this.flag;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

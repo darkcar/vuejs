@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animation</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px);
+        } 
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.4s ease;
+        }
+
+        /* my-enter**/
+        .my-enter,
+        .my-leave-to{
+            opacity: 0;
+            transform: translateY(70px);
+        }
+
+        .my-enter-active,
+        .my-leave-active {
+            transition: all 0.8s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-3">User Defined Animation</h1>
+            </div>
+            <div class="row">
+                <div style="height:100px;"></div>
+            </div>
+            <div class="row">
+                <div class="col-md" style="height:106px;">
+                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" @click='flag=!flag'>Click Me!</button>
+                </div>
+                <div class="col-md">
+                    <div class="card text-white bg-success" v-if="flag">
+                        <div class="card-body">
+                            <h4 class="card-title">No Animation</h4>
+                            <p class="card-text">Click the button, and see how to hide and show the panel.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md" style="height: 154px">
+                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" @click='animateFlag=!animateFlag'>Click Me!</button>
+                </div>
+                <div class="col-md">
+                    <transition>
+                        <div class="card text-white bg-success" v-if="animateFlag">
+                            <div class="card-body">
+                                <h4 class="card-title">Animation Added</h4>
+                                <p class="card-text">Click the button, and see how to hide and show the panel. Just change two places, wrap this code snippet with Vue transition tag and add style to the right class.</p>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md">
+                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" @click='custFlag=!custFlag'>Click Me!</button>
+                </div>
+                <div class="col-md">
+                    <transition name="my">
+                        <div class="card text-white bg-success" v-if="custFlag">
+                            <div class="card-body">
+                                <h4 class="card-title">Customized Animation </h4>
+                                <p class="card-text">Click the button, and see how to hide and show the panel. Add my in front of the animation point.</p>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag: true,
+                animateFlag: true,
+                custFlag: true
+            }
+        });
+    </script>
+</body>
+</html>

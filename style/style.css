@@ -1,3 +1,4 @@
+/**Homepage*/
 .form-inline label {
     padding-right: 10px;
     padding-left: 10px;
@@ -5,4 +6,27 @@
 
 #search {
     margin-left: 20px;
+}
+
+
+/**end of home****/
+
+#add-btn {
+    margin-left: 20px;
+}
+
+.ball {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+span.shopping-cart {
+    font-size: 3rem;
+}
+
+div.dest{
+    margin-top: 360px;
+    margin-left: 130px;
 }

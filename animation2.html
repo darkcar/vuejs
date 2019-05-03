@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animation</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/animate.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-3">Animate.css Animation</h1>
+            </div>
+            <div class="row">
+                <div class="col-md" style="height: 154px">
+                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" @click='animateFlag=!animateFlag'>Click Me!</button>
+                </div>
+                <div class="col-md">
+                    <!--:duration: set the enter and leave duration. -->
+                    <!-- <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="500"> -->
+                    <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="{enter:500, leave:800}">
+                        <div class="card text-white bg-success" v-if="animateFlag">
+                            <div class="card-body">
+                                <h4 class="card-title">Animation Added</h4>
+                                <p class="card-text">Click the button, and see how to hide and show the panel. Use animate.css lib, easily adding class to the Vue transition tag.</p>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag: true,
+                animateFlag: true,
+                custFlag: true
+            }
+        });
+    </script>
+</body>
+</html>

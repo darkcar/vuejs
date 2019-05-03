@@ -8,11 +8,32 @@
     <script src="lib/vue2-6.10.js"></script>
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">
+    <style>
+        .v-enter, 
+        .v-leave-to{
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.6s ease;
+        }
+    </style>
 </head>
 <body>
     <div id="app" class="container">
         <div class="jumbotron">
             <h2 class="display-4" v-fontsize="100">VueJs Application</h2>
+            <p class="lead">What's included in this app?</p>
+            <hr class="my-4">
+            <div class="list-group">
+                <a href="resource.html" class="list-group-item list-group-item-action">How to send ajax request?</a>
+                <a href="datalist.html" class="list-group-item list-group-item-action">How to send request to RESTFul data?</a>
+                <a href="animation.html" class="list-group-item list-group-item-action">How to create animation?</a>
+                <a href="animation2.html" class="list-group-item list-group-item-action">How to use third-party (animate.css) animation?</a>
+                <a href="animation3.html" class="list-group-item list-group-item-action">How to implement in JS hooks?</a>
+            </div>
         </div>
 
         <div class="card text-dark bg-primary">
@@ -48,15 +69,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in search(keywords)" :key="item.id">
-                    <td scope="row">{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.ctime | dateFormat('') }}</td>
-                    <td>
-                        <a href="#" class="badge badge-primay">Edit</a>
-                        <a href="#" class="badge badge-danger" @click.prevent="del(item.id)">Delete</a>
-                    </td>
-                </tr>
+                <transition-group>
+                    <tr v-for="item in search(keywords)" :key="item.id">
+                        <td scope="row">{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.ctime | dateFormat('') }}</td>
+                        <td>
+                            <a href="#" class="badge badge-primay">Edit</a>
+                            <a href="#" class="badge badge-danger" @click.prevent="del(item.id)">Delete</a>
+                        </td>
+                    </tr>
+                </transition>
             </tbody>
         </table>
     </div>

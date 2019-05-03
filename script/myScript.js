@@ -80,7 +80,8 @@ var vm = new Vue({
         list: [
             {id: 1, name: 'Merceden Ben', ctime: new Date()},
             {id: 2, name: 'BMW', ctime: new Date()}
-        ]
+        ],
+        requestData: ''
     }, 
     // After create Vue Instance, called one init method, beforeCreate()
     beforeCreate() {
@@ -124,6 +125,10 @@ var vm = new Vue({
     /********************End Stage of destroy *************** */
     methods: {
         add() {
+            if(this.id=='' || this.name == '') {
+                alert("Required Data Field");
+                return;
+            }
             var prod = {id : this.id, name : this.name, ctime : new Date()};
             this.list.push(prod);
             this.id = "";
@@ -152,20 +157,20 @@ var vm = new Vue({
         },
         getInfo() { // Send get Request
             this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(result){
-                console.log(result.body);
+                this.requestData = result.body;
             });
         },
         postInfo() {
-            this.$http.post('https://jsonplaceholder.typicode.com/photos', {}, {emulateJSON:true}).then(
+            this.$http.post('https://jsonplaceholder.typicode.com/users', {}, {emulateJSON:true}).then(
                 result=> {
-                    console.log(result);
+                    this.requestData = result;
                 }
             )
         },
         jsonpInfo() {
             this.$http.jsonp('https://jsonplaceholder.typicode.com/comments').then(
                 result=> {
-                    console.log(result.body);
+                    this.requestData = result.body;
                 }
             )
         }
