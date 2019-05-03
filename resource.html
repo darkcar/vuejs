@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Request</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <script src="lib/vue-resource.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="jumbotron">
+            <h2 class="display-4" v-fontsize="100">VueJs Send Request</h2>
+        </div>
+        <hr class="my-4">
+        <p>Here it demonstates get/post/jsonp request</p>
+        <p class="lead">
+            <input type="button" class="btn btn-primary btn-lg" value="Get Request" @click="getInfo">
+            <input type="button" class="btn btn-success btn-lg" value="Post Request" @click="postInfo">
+            <input type="button" class="btn btn-danger btn-lg" value="JSONP Request" @click="jsonpInfo">
+        </p>
+    </div>
+    <script src="script/myScript.js"></script>
+</body>
+</html>

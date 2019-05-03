@@ -149,6 +149,25 @@ var vm = new Vue({
                     return item;
                 }
             });
+        },
+        getInfo() { // Send get Request
+            this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(result){
+                console.log(result.body);
+            });
+        },
+        postInfo() {
+            this.$http.post('https://jsonplaceholder.typicode.com/photos', {}, {emulateJSON:true}).then(
+                result=> {
+                    console.log(result);
+                }
+            )
+        },
+        jsonpInfo() {
+            this.$http.jsonp('https://jsonplaceholder.typicode.com/comments').then(
+                result=> {
+                    console.log(result.body);
+                }
+            )
         }
     },
     filters: {
@@ -166,4 +185,3 @@ var vm = new Vue({
         }
     }
 });
-

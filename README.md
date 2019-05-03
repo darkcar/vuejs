@@ -15,4 +15,6 @@ Step by step learning procedure.
 
 - destroyed 
 
-## Keep learning how to send get/post/jsonp request in vue. day 02 - 18
+## vue-resource send get/post/jsonp request
+
+- The last one is important. 
