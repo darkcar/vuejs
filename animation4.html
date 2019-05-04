@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Brand Management</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+        li{
+            width: 100%;
+        }
+
+        li:hover{
+            background-color: hotpink;
+            transition: all 0.8s ease;
+        }
+        .v-enter, 
+        .v-leave-to{
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.6s ease;
+        }
+
+        .v-move{
+            transition: all 0.6s ease;
+        }
+        .v-leave-active {
+            position: absolute;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="jumbotron">
+            <h2 class="display-4">Animation Add List Item</h2>
+        </div>
+        <div class="card text-dark bg-primary">
+          <div class="card">
+              <!--Private Directives-->
+              <div class="card-header text-primary">
+                  Add Brand
+              </div>
+              <div class="card-body">
+                  <form class="form-inline">
+                        <div class="form-group">
+                            <label for="id">ID</label>
+                            <input type="text" id="id" class="form-control" v-model="id">
+                            <label for="namd">Name</label>
+                            <!-- <input type="text" id="name" class="form-control" v-model="name" @keyup.f2="add"> -->
+                            <input type="text" id="name" class="form-control" v-model="name" @keyup.enter="add">
+                            <input type="button" name="" id="id" class="form-control btn btn-primary" value="Add" @click="add">
+                        </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md" style="margin-top:30px">
+                <ul class="list-group">
+                    <transition-group appear>
+                        <li class="list-group-item" v-for="(item,i) in list" :key="item.id" @click="del(i)">{{item.id}} ===== {{item.name}} ===== {{item.ctime}}</li>
+                    </transition-group> 
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <div class="footer"></div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                id:'',
+                name: '',
+                list: [
+                    {id: 1, name: 'Merceden Ben', ctime: new Date()},
+                    {id: 2, name: 'BMW', ctime: new Date()},
+                    {id: 3, name: 'GMC', ctime: new Date()},
+                    {id: 4, name: 'Ford', ctime: new Date()},
+                    {id: 5, name: 'Honda', ctime: new Date()}
+                ],
+            },
+            methods: {
+                add() {
+                    if(this.id=='' || this.name == '') {
+                        alert("Required Data Field");
+                        return;
+                    }
+                    var prod = {id : this.id, name : this.name, ctime : new Date()};
+                    this.list.push(prod);
+                    this.id = "";
+                    this.name = "";
+                },
+                del(id) {
+                    // this.list.some((item, i) => {
+                    //     if(item.id == id) {
+                    //         this.list.splice(i, 1);
+                    //         return true;
+                    //     }
+                    // });
+                    var index = this.list.findIndex(item => {
+                        if(item.id == id) {
+                            return true;
+                        }
+                    });
+                    this.list.splice(index, 1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -17,4 +17,5 @@ Step by step learning procedure.
 
 ## vue-resource send get/post/jsonp request
 
-- The last one is important. 
+## Vue components 
+

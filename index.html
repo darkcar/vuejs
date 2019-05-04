@@ -8,18 +8,6 @@
     <script src="lib/vue2-6.10.js"></script>
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">
-    <style>
-        .v-enter, 
-        .v-leave-to{
-            opacity: 0;
-            transform: translateY(80px);
-        }
-
-        .v-enter-active,
-        .v-leave-active{
-            transition: all 0.6s ease;
-        }
-    </style>
 </head>
 <body>
     <div id="app" class="container">
@@ -28,11 +16,12 @@
             <p class="lead">What's included in this app?</p>
             <hr class="my-4">
             <div class="list-group">
-                <a href="resource.html" class="list-group-item list-group-item-action">How to send ajax request?</a>
-                <a href="datalist.html" class="list-group-item list-group-item-action">How to send request to RESTFul data?</a>
-                <a href="animation.html" class="list-group-item list-group-item-action">How to create animation?</a>
-                <a href="animation2.html" class="list-group-item list-group-item-action">How to use third-party (animate.css) animation?</a>
-                <a href="animation3.html" class="list-group-item list-group-item-action">How to implement in JS hooks?</a>
+                <a href="resource.html" class="list-group-item list-group-item-action">1. How to send ajax request?</a>
+                <a href="datalist.html" class="list-group-item list-group-item-action">2. How to send request to RESTFul data?</a>
+                <a href="animation.html" class="list-group-item list-group-item-action">3. How to create animation?</a>
+                <a href="animation2.html" class="list-group-item list-group-item-action">4. How to use third-party (animate.css) animation?</a>
+                <a href="animation3.html" class="list-group-item list-group-item-action">5. How to implement in JS hooks?</a>
+                <a href="animation4.html" class="list-group-item list-group-item-action">6. How to add animation to add list?</a>
             </div>
         </div>
 
@@ -69,19 +58,20 @@
                 </tr>
             </thead>
             <tbody>
-                <transition-group>
-                    <tr v-for="item in search(keywords)" :key="item.id">
-                        <td scope="row">{{item.id}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.ctime | dateFormat('') }}</td>
-                        <td>
-                            <a href="#" class="badge badge-primay">Edit</a>
-                            <a href="#" class="badge badge-danger" @click.prevent="del(item.id)">Delete</a>
-                        </td>
-                    </tr>
-                </transition>
+                <tr v-for="item in search(keywords)" :key="item.id">
+                    <td scope="row">{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime | dateFormat('') }}</td>
+                    <td>
+                        <a href="#" class="badge badge-primay">Edit</a>
+                        <a href="#" class="badge badge-danger" @click.prevent="del(item.id)">Delete</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
+        <div class="row">
+            <div class="footer"></div>
+        </div>
     </div>
     <script src="script/myScript.js"></script>
 </body>
