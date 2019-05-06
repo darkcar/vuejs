@@ -190,3 +190,57 @@ var vm = new Vue({
         }
     }
 });
+
+
+/***Comment Box Component */
+var componentBox = {
+    template: '#tmplcomment',
+    data() {
+        return {
+            user: '',
+            content: ''
+        }
+    },
+    methods: {
+        postcomment() {
+            var comment = {id: Date.now(), user: this.user, content: this.content};
+
+            // Get data from local storage
+            var commList = JSON.parse(localStorage.getItem('cmts') || '[]');
+
+            commList.unshift(comment);
+
+            localStorage.setItem('cmts', JSON.stringify(commList));
+
+            this.user = this.content = "";
+
+            // update comment list
+            this.$emit('func');
+        }
+    }
+}
+
+var vm2 = new Vue({
+    el: '#app2',
+    data: {
+        datalist: [
+            {id: 1, user: 'Franky', content: "Nice car, and I wanna buy it!"},
+            {id: 2, user: 'Json', content: "No, don't buy this car. Really bad experience."},
+            {id: 3, user: 'Justin', content: "Hi, buy it or whatever, you have your freedome!"}
+        ]
+    },
+    created() {
+        this.loadComments();
+    },
+    methods: {
+        // Load Comments List
+        loadComments() {
+            var commentList = JSON.parse(localStorage.getItem('cmts') || '[]');
+            this.datalist = commentList;
+
+        }
+    },
+    components: {
+        'cmt-box': componentBox
+    }
+});

@@ -22,6 +22,8 @@
                 <a href="animation2.html" class="list-group-item list-group-item-action">4. How to use third-party (animate.css) animation?</a>
                 <a href="animation3.html" class="list-group-item list-group-item-action">5. How to implement in JS hooks?</a>
                 <a href="animation4.html" class="list-group-item list-group-item-action">6. How to add animation to add list?</a>
+                <a href="componets.html" class="list-group-item list-group-item-action">7. How to create components in Vue?</a>
+                <a href="router.html" class="list-group-item list-group-item-action">8. How to use frontend router in Vue?</a>
             </div>
         </div>
 
@@ -45,34 +47,65 @@
                         </div>
                   </form>
               </div>
+              <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>Ctime</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in search(keywords)" :key="item.id">
+                            <td scope="row">{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.ctime | dateFormat('') }}</td>
+                            <td>
+                                <a href="#" class="badge badge-primay">Edit</a>
+                                <a href="#" class="badge badge-danger" @click.prevent="del(item.id)">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
           </div>
         </div>
-
-        <table class="table ">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>Ctime</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in search(keywords)" :key="item.id">
-                    <td scope="row">{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.ctime | dateFormat('') }}</td>
-                    <td>
-                        <a href="#" class="badge badge-primay">Edit</a>
-                        <a href="#" class="badge badge-danger" @click.prevent="del(item.id)">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="footer"></div>
-        </div>
     </div>
+    <hr class="my-4">
+    <div class="container">
+        <div id="app2">
+            <cmt-box v-on:func="loadComments"></cmt-box>
+            <div class="card">
+                <ul class="list-group list-group-flush" style="background-color:darkturquoise;">
+                    <li class="list-group-item" v-for="val in datalist" :key="val.id">
+                        {{val.content}} by <span class="badge badge-pill badge-primary">{{val.user}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>            
+    </div>
+    <div class="row">
+        <div class="footer"></div>
+    </div>
+
+    <!--Component Template-->
+    <template id="tmplcomment">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Users' Comments: </h4>
+                <p class="card-text">Leave your comments...</p>
+                <div class="form-group">
+                    <label for="commentuser">Name: </label>
+                    <input type="text" name="commentuser" id="commentuser" class="form-control" placeholder="Your Name..." aria-describedby="helpId" v-model="user">
+                    <div class="form-group">
+                    <label for="commentarea">Comment:</label>
+                    <textarea class="form-control" name="" id="commentarea" rows="3" placeholder="Your comment..." v-model="content"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" @click="postcomment">Submit</button>
+                </div>
+            </div>
+        </div>
+    </template>
     <script src="script/myScript.js"></script>
 </body>
 </html>

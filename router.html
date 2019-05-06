@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Router in Vue</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <script src="lib/vue-resource.js"></script>
+    <script src="lib/vue-router.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-3">Vue Router</h1>
+            <p class="lead">
+                <ul class="list-group">
+                    <li class="list-group-item">前端路由：对于单个页面程序来说，主要通过URL中的hash来实现不同页面之间的切换，同时hash有一个特点：HTTP请求中不包含hash内容，所有，但页面程序中的页面跳转主要用hash实现。</li>
+                    <li class="list-group-item">后端路由：所有的超链接都是URL地址，所有的URL地址对应服务器上对应的资源。</li>
+                    <li class="list-group-item">在单页面应用程序中，这种通过hash改变来切换页面的方式，就是前端路由。</li>
+                    <li class="list-group-item">Read this article: <a href="http://www.cnblogs.com/joyho/articles/4430148.html">http://www.cnblogs.com/joyho/articles/4430148.html</a></li>
+                </ul>
+            </p>
+        </div>
+        <div id="app">
+            <div class="row">
+                <div class="col-md text-center">
+                    <router-link to="/login" class="btn btn-primary">Login Form</router-link>
+                    <router-link to="/register" class="btn btn-secondary">Register Form</router-link>
+                </div>
+                <hr class="my-4">
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+    </div>
+    <template id="logintmpl">
+        <div class="mx-auto card">
+            <form class="px-4 py-3">
+                <div class="form-group">
+                <label for="exampleDropdownFormEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                <label for="exampleDropdownFormPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                    <label class="form-check-label" for="dropdownCheck">
+                    Remember me
+                    </label>
+                </div>
+                </div>
+                <a class="btn btn-secondary" href="#/register" role="button">Sign Up</a>
+                <a class="btn btn-primary" href="#/login" role="button">Sign in</a>
+            </form>
+        </div>
+    </template>
+    <template id="signuptmpl">
+        <div class="mx-auto card">
+            <form class="px-4 py-3">
+                <div class="form-group">
+                    <label for="realname">Real Name</label>
+                    <input type="email" class="form-control" id="realname" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleDropdownFormEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="exampleDropdownFormPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmpass">Re-Password</label>
+                    <input type="repassword" class="form-control" id="confirmpass" placeholder="Re-Password">
+                </div>
+                <a class="btn btn-secondary" href="#/login" role="button">Sign in</a>
+                <a class="btn btn-primary" href="#/register" role="button">Sign Up</a>
+            </form>
+        </div>
+    </template>
+    <script>
+        var login = {
+            template : '#logintmpl'
+        }
+
+        var register = {
+            template : '#signuptmpl'
+        }
+        // after import router lib, there is a VueRouter in window object.
+        var routerObj = new VueRouter({
+            routes : [
+                {path: '/login', component: login},
+                {path: '/register', component: register}
+            ]
+        });
+
+
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                loginCom: login,
+                registerCom: register
+            },
+            router: routerObj
+        });
+    </script>
+</body>
+</html>

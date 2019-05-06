@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <script src="lib/vue-resource.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="jumbotron">
+            <h2 class="display-4">VueJs Components</h2>
+        </div>
+        <hr class="my-4">
+        <my-com></my-com>
+        <hr class="my-3">
+        <h4>Source Code:</h4>
+        <code>
+            var comp = Vue.extend({
+                template: "< h3>This is heading 3, from Vue component.< /h3>"
+            });
+            Vue.component('myCom', comp);
+        </code>
+        <hr class="my-4">
+        <my-component-heading></my-component-heading>
+        <code>
+            Vue.component('myComponentHeading', Vue.extend({
+                template: '< h4>This is heading 4, from Vue Component< /h4>'
+            }));
+        </code>
+        <hr class="my-4">
+        <mycom2></mycom2>
+        <code>
+            Vue.component('mycom2', {
+                template: '< h2>This is heading 2, using vue componenet< /h2>'
+            })
+        </code>
+        <hr class="my-3">
+        <p class="lead">Note: 
+            <ul>
+                <li>Template can only have one root element.</li>
+                <li>Componenets must come before Vue instance.</li>
+            </ul>
+        </p>
+        <hr class="my-4">
+        <mycom3></mycom3>
+        <code>
+            Vue.component('mycom3', {
+                template: '#tmp1'
+            })
+            <br>
+            <!-- Define it outside the app-->
+            < template id="tmp1">
+                < div>
+                    < h1>This is heading 1.</h1>
+                    < h4>This is heading 4.</h4>
+                < /div>
+            < /template>
+        </code>
+        <hr class="my-4">
+        <login></login>
+        <hr class="my-4">
+        <mycom4></mycom4>
+        <code>
+            Vue.component('mycom4', {
+                template: "< h3>6. This component has its own data attribute --- \{\{msg}}< /h3>",
+                data: function() {
+                    return {
+                        msg: 'I am from component.'
+                    }
+                }
+            })
+        </code>
+        <hr class="my-4">
+        <h3>7. Counter Component: </h3>
+        <counter></counter>
+        <hr class="my-4">
+        <h3>8. Swap between two different components: v-if and v-else: </h3>
+        <a name="" id="" class="btn btn-primary" href="#" role="button" @click.prevent="flag=true">Login</a>
+        <a name="" id="" class="btn btn-secondary" href="#" role="button" @click.prevent="flag=false">Sign Up</a>
+        <login-com v-if="flag"></login-com>
+        <register-com v-else="flag"></register-com>
+        <hr class="my-4">
+        <h3>9. How to swap among more componenets with animation? </h3>
+        <a name="" id="" class="btn btn-primary" href="#" role="button" @click.prevent="comName='loginCom'">Login</a>
+        <a name="" id="" class="btn btn-secondary" href="#" role="button" @click.prevent="comName='registerCom'">Sign Up</a>
+        <a name="" id="" class="btn btn-danger" href="#" role="button" @click.prevent="comName='privacyCom'">Privacy</a>
+        <transition mode="out-in">
+            <component :is="comName"></component>
+        </transition>
+        <hr class="my-4">
+        <h3>10. How to pass data from parent component to child component?</h3>
+        <child-component v-bind:parentdata="parentdata"></child-component>
+        <hr class="my-4">
+        <h3>11. How to pass events from parent to child? v-on:func="" / @func=""</h3>
+        <alert-com @func="popupAlert"></alert-com>
+        <hr class="my-4">
+        <h3>12. How to get DOM element in Vue? use ref=''</h3>
+        <button type="button" class="btn btn-primary" @click="getdomtext('myparag')">Click to get paragraph text</button>
+        <button type="button" class="btn btn-secondary" @click="getdomtext('secondpara')">Click to get second para text</button>
+        <p id="myparag" ref="myparag">This is a paragraph, you can have all your description here.</p>
+        <p id="secondpara" ref="secondpara">This is the second paragraph!!!</p>
+    </div>
+    <div class="footer"></div>
+
+
+    <!-- Define it outside the app-->
+    <template id="tmp1">
+        <div>
+            <h1>4. This is heading 1.</h1>
+            <h4>This is heading 4.</h4>
+        </div>
+    </template>
+    <template id="tmpl2">
+        <div>
+            <input type="button" value="+1" @click="increment">
+            {{count}}
+        </div>
+    </template>
+    <template id="templ2">
+        <div>
+            <button type="button" class="btn btn-primary btn-lg btn-block" @click="myclick">Click Me to Call Parent's AlertPop()</button>
+        </div>
+    </template>
+    <script>
+        /** Method 1 - Vue Component */
+        var comp = Vue.extend({
+            template: '<h3>1. This is heading 3, from Vue component.</h3>'
+        });
+
+        Vue.component('myCom', comp);
+
+        /** Method 2 - Vue Component */
+        Vue.component('myComponentHeading', Vue.extend({
+            template: '<h4>2. This is heading 4, from Vue Component</h4>'
+        }));
+
+        /* Method  3 - **/
+        Vue.component('mycom2', {
+            template: '<h2>3. This is heading 2, using vue componenet</h2>'
+        })
+
+        /* Method 4 - Create Component**/
+        Vue.component('mycom3', {
+            template: '#tmp1'
+        })
+
+        /**Component can have its own data, but data must be in object*/
+        Vue.component('mycom4', {
+            template: "<h3>6. This component has its own data attribute --- {{msg}}</h3>",
+            data: function() {
+                return {
+                    msg: 'I am from component.'
+                }
+            }
+        })
+
+        /**This is counter component**/
+        Vue.component('counter', {
+            template: '#tmpl2',
+            data: function() {
+                return {count:0};
+            },
+            methods: {
+                increment() {
+                    this.count++;
+                }
+            }
+        })
+
+        /**Login and Sign up panel switch**/
+        Vue.component('loginCom', {
+            template: '<p>This is login component</p>'
+        });
+
+        Vue.component('registerCom', {
+            template: '<p>This is sign up component</p>'
+        })
+
+        /**Add One more component**/
+        Vue.component('privacyCom', {
+            template: '<p>Read the privacy page first</p>'
+        })
+
+        var vm = new Vue({
+            el:'#app',
+            // private component
+            data: {
+                flag:true,
+                comName: 'loginCom',
+                parentdata: 'The data from parents.'
+            },
+            methods: {
+                popupAlert(dataparam) {
+                    alert("Hey, I am the alert from parent." + dataparam);
+                },
+                getdomtext(id) {
+                    console.log(id);
+                    // use $refs
+                    alert(this.$refs[id].innerText);
+                }
+            },
+            filters: {},
+            directives: {},
+            components: {
+                login: {
+                    template: "<h3>5. This is a private compomenet</h3>"
+                }, 
+                childComponent : {
+                    props: ['parentdata'],
+                    template: '<p>Child compoenet with <strong>{{parentdata}}</strong></p>'
+                },
+                alertCom: {
+                    template: '#templ2',
+                    methods: {
+                        myclick() {
+                            // click this to trigger parent's popupAlert()
+                            this.$emit('func', "--- child Comp Name: alertCom ");
+                        }
+                    }
+                }
+            },
+            beforeCreate(){},
+            created(){},
+            beforeMount() {},
+            mounted() {},
+            beforeUpdate() {},
+            updated() {},
+            beforeDestroy() { },
+            destroyed() {},
+        });
+    </script>
+</body>
+</html>
