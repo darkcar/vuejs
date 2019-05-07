@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nested Router</title>
+    <script src="lib/vue2-6.10.js"></script>
+    <script src="lib/vue-router.js"></script>
+    <script src="lib/vue-resource.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <router-link to="/account">Account</router-link>
+            <router-view></router-view>
+        </div>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h3>This Account</h3>
+            <router-link to="/account/login">Login</router-link>
+            <router-link to="/account/register">Register</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+
+    <template id="logintmpl">
+        <div>
+            <h4>Login Component</h4>
+        </div>
+       
+    </template>
+
+    <template id="registertmpl">
+        <div>
+            <h4>Register Componenet</h4>
+        </div>
+    </template>
+    <script>
+        var account = {
+            template : '#tmpl'
+        }
+
+        var login = {
+            template : '#logintmpl'
+        }
+
+        var register = {
+            template : '#registertmpl'
+        }
+
+        // Define router
+        var router = new VueRouter({
+            routes: [
+                {
+                    path: '/account', 
+                    component: account,
+                    children: [
+                        { path: 'login', component: login},
+                        { path: 'register', component: register}
+                    ]
+                }
+            ]
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+</html>
