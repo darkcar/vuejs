@@ -10,6 +10,23 @@
     <script src="lib/vue-router.js"></script>
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">
+    <style>
+        .router-link-active {
+            font-weight: 800;
+            font-style: italic;
+        }
+
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(140px);
+        }  
+
+        .v-enter-active, 
+        .v-leave-active{
+            transition: all 0.5s ease;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -27,17 +44,22 @@
         <div id="app">
             <div class="row">
                 <div class="col-md text-center">
-                    <router-link to="/login" class="btn btn-primary">Login Form</router-link>
+                    <!-- Pass data through get ?id=10 -->
+                    <router-link to="/login?id=10&name=frankwang" class="btn btn-primary">Login Form</router-link>
                     <router-link to="/register" class="btn btn-secondary">Register Form</router-link>
+                    <router-link to="/login/12/frankwang" class="btn btn-secondary">Pass Value to Page</router-link>
                 </div>
                 <hr class="my-4">
             </div>
             <div class="row">
                 <div class="col-md">
-                    <router-view></router-view>
+                    <transition mode="out-in">
+                        <router-view></router-view>
+                    </transition>
                 </div>
             </div>
         </div>
+        <div class="footer"></div>
     </div>
     <template id="logintmpl">
         <div class="mx-auto card">
@@ -60,7 +82,13 @@
                 </div>
                 <a class="btn btn-secondary" href="#/register" role="button">Sign Up</a>
                 <a class="btn btn-primary" href="#/login" role="button">Sign in</a>
+                <p class="lead">Passed value through get: {{$route.query.id}} --- {{$route.query.name}}</p>
             </form>
+        </div>
+    </template>
+    <template id="logintmpl2">
+        <div class="mx-auto card">
+            <h3>Your have passed values are id : {{$route.params.id}} -- name : {{$route.params.name}}</h3>
         </div>
     </template>
     <template id="signuptmpl">
@@ -88,8 +116,12 @@
         </div>
     </template>
     <script>
+        var loginbypassedvalue = {
+            template : '#logintmpl2',
+        }
+
         var login = {
-            template : '#logintmpl'
+            template : '#logintmpl',
         }
 
         var register = {
@@ -98,9 +130,15 @@
         // after import router lib, there is a VueRouter in window object.
         var routerObj = new VueRouter({
             routes : [
-                {path: '/login', component: login},
+                // How to redirect to login component.
+                {path: '/', redirect: '/login'},
+                {path: '/login/', component: login},
+                {path: '/login/:id', component: loginbypassedvalue},
+                {path: '/login/:id/:name', component: loginbypassedvalue},
                 {path: '/register', component: register}
-            ]
+            ],
+            // Modify the class of the tag.
+            linkActiveClass: 'btn btn-primary'
         });
 
 
