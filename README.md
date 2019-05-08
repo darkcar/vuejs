@@ -20,3 +20,9 @@ Step by step learning procedure.
 ## Vue components 
 
 ## Vue Router 
+
+## Vue Events: watch, methods, computed comparision.
+
+## webpack 
+
+-- day5 - 10

@@ -1,3 +1,42 @@
 1. JSONP 实现原理
     由于浏览器的安全性限制，不允许AJAX访问协议不同，域名不同，端口不同的数据接口，浏览器认为这种访问不安全。
      
+2. 计算属性：computed
+    computed: {
+        'fullname': function() {
+            return this.firstname + " " + this.middlename + " " + this.lastname;
+        }
+    }
+    计算属性的结果会被缓存，方便下次直接使用，如果计算属性方法中，任何数据没有变化，就不会被求值。
+
+3. watch, methods, computed:
+    只要是计算属性和watch属性，都是方法。但是computed属性必须要return，但是watch就不需要。
+    methods也是一个方法，侧重业务逻辑处理。
+    computed属性结果会被缓存，除非依赖的响应式属性变化才会重新计算。
+    watch一个对象，主要监听特定属性的变化。
+
+4. npm镜像
+
+5. webpack：
+5.1 静态资源： 
+    - JS： *.js, *jsx, *.coffee, *.ts(TypeScript) 
+    - CSS: *.css, *.less, *.sass, *.scss 
+    - Images: *.jpg, *.png, *.gif, *.bmp, *.svg
+    - Fonts: *.svg, *.ttf, *.eot, *.woff, *.woff2
+    - 模版文件: *.ejs, *.jade, *.vue[webpack中定义组件的方式]
+
+5.2 网页引入很多静态资源后有什么问题？
+    - 网页加载速度很慢，发起很多二次请求。
+    - 要处理很多错综复杂的依赖关系。
+
+    5.2.1 如何处理问题：
+    - 压缩、合并、精灵图、图片的Base64编码
+    - 可以使用学过的requireJS，也可以使用webpack解决各个包之间的复杂依赖关系。
+
+5.3 什么是webpack？
+    webpack是前端的项目构建工具，基于Node.js开发出来的一个前端工具。
+    可以使用gulp也可以。
+
+5.4 Gulp和webpack的区别？
+    - gulp是基于task的
+    - webpack是基于web项目构建的。

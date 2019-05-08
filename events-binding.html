@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Events Binding - watch property</title>
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="lib/vue2-6.10.js"></script>
+    <script src="lib/vue-resource.js"></script>
+    <script src="lib/vue-router.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="jumbotron">
+            <h1 class="display-3">Use Vue Watch property</h1>
+            <p class="lead">Type in first name and last name, full name will be placed in the end.</p>
+            <p class="lead">Click the buttons below, and see how to use watch monitoring the router changes.</p>
+        </div>
+        <div class="form-group">
+            <label for="firstname">FirstName</label>
+            <input type="text" name="" id="firstname" class="form-control" placeholder="Your firstname" v-model="firstname">
+        </div>
+        <div class="form-group">
+            <label for="lastname">LastName</label>
+            <input type="text" name="" id="lastname" class="form-control" placeholder="Your lastname" v-model="lastname">
+        </div>
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <p class="card-text">Your Full Name is: {{fullname}}</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <p class="lead">Click the button and the content will be changed based on the router path.</p>
+        <router-link to="/login" class="btn btn-primary">Login</router-link>
+        <router-link to="/register" class="btn btn-secondary">Register</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        const login = {
+            template: '<h3>Welcome to Login Page</h3>'
+        }
+
+        const register = {
+            template: '<h3>Welcome to Register Page</h3>'
+        }
+
+        const router = new VueRouter({
+            routes: [
+                {path: '/login', component: login},
+                {path: '/register', component: register}
+            ]
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: '',
+                lastname: '',
+                fullname: ''
+            },
+            watch: {
+                'firstname': function(newVal) {
+                    this.fullname = newVal + " " + this.lastname;
+                },
+                'lastname': function(newVal) {
+                    this.fullname = this.firstname + " " + newVal;
+                }
+            },
+            computed: { // 
+                'fullname': function(){ 
+                    return this.firstname + this.lastname;
+                }
+            },
+            components: {
+                login: login,
+                register: register
+            },
+            router
+        });
+    </script>
+</body>
+</html>
