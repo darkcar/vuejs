@@ -7,15 +7,14 @@
     <title>Router Example</title>
     <script src="lib/vue2-6.10.js"></script>
     <script src="lib/vue-router.js"></script>
-    <script src="lib/vue-resource.js"></script>
     <link rel="stylesheet" href="style/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
         <div id="app">
             <router-view></router-view>
-            <router-view></router-view>
-            <router-view></router-view>
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
         </div>
     </div>
 
@@ -33,17 +32,17 @@
         }
         
         var router = new VueRouter({
-            routers: [
+            routers: [ 
                 {
-                    path: '/', 
+                     path: '/', 
                     components: {
-                        default: header,
+                        default: headBox,
                         left: leftBox,
                         main: mainBox
-                    }   
+                    }    
                 }
             ]
-        })
+        });
 
         var vm = new Vue({
             el: '#app',
