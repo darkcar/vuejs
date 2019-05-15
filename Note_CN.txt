@@ -40,3 +40,5 @@
 5.4 Gulp和webpack的区别？
     - gulp是基于task的
     - webpack是基于web项目构建的。
+
+6. webpack-dev-server打包的bundle.js文件，并没有放到实际的磁盘上，而是直接放到了电脑的内存中，所以我们的根目录找不到。
